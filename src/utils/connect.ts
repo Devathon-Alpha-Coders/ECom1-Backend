@@ -6,7 +6,7 @@ async function connect() {
   const dbUri = config.get<string>("dbUri");
 
   try {
-    await mongoose.connect(dbUri);
+    await mongoose.connect("mongodb+srv://ecomadmin:ecomadmin123@cluster0.w23uq.mongodb.net");
     logger.info("DB connected");
   } catch (error) {
     logger.error("Could not connect to db");

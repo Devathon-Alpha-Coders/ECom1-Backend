@@ -1,6 +1,6 @@
 export default {
-  port: 1337,
-  dbUri: "mongodb://localhost:27017/rest-api-tutorial",
+  port: 4000,
+  dbUri: "mongodb+srv://ecomadmin:ecomadmin123@cluster0.w23uq.mongodb.net",
   saltWorkFactor: 10,
   accessTokenTtl: "15m",
   refreshTokenTtl: "1y",
