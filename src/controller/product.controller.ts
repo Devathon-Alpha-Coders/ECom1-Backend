@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
 import {
   CreateProductInput,
+  ReadAllProductInput,
+  ReadProductInput,
   UpdateProductInput,
 } from "../schema/product.schema";
+
 import {
   createProduct,
   deleteProduct,
+  findAllProducts,
   findAndUpdateProduct,
   findProduct,
 } from "../service/product.service";
@@ -50,7 +54,7 @@ export async function updateProductHandler(
 }
 
 export async function getProductHandler(
-  req: Request<UpdateProductInput["params"]>,
+  req: Request<ReadProductInput["params"]>,
   res: Response
 ) {
   const productId = req.params.productId;
@@ -61,6 +65,20 @@ export async function getProductHandler(
   }
 
   return res.send(product);
+}
+
+export async function getAllProductsHandler(
+  req: Request,
+  res: Response
+) {
+  const products = await findAllProducts();
+  console.log(`🚀 ~ products:`, products)
+
+  if (!products) {
+    return res.sendStatus(404);
+  }
+
+  return res.send(products);
 }
 
 export async function deleteProductHandler(

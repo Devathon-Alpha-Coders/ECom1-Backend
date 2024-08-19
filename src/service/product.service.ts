@@ -21,6 +21,14 @@ export async function findProduct(
   return ProductModel.findOne(query, {}, options);
 }
 
+export async function findAllProducts(
+  // query: FilterQuery<ProductDocument>,
+  // options: QueryOptions = { lean: true }
+) {
+  // return ProductModel.find(query, {}, options);
+  return ProductModel.find();
+}
+
 export async function findAndUpdateProduct(
   query: FilterQuery<ProductDocument>,
   update: UpdateQuery<ProductDocument>,

@@ -1,6 +1,7 @@
 import { Express, Request, Response } from "express";
 import {
   createProductHandler,
+  getAllProductsHandler,
   getProductHandler,
   updateProductHandler,
 } from "./controller/product.controller";
@@ -15,6 +16,7 @@ import validateResource from "./middleware/validateResource";
 import {
   createProductSchema,
   deleteProductSchema,
+  getAllProductsSchema,
   getProductSchema,
   updateProductSchema,
 } from "./schema/product.schema";
@@ -22,7 +24,7 @@ import { createSessionSchema } from "./schema/session.schema";
 import { createUserSchema } from "./schema/user.schema";
 
 function routes(app: Express) {
-  app.get("/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
+  app.get("/api/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
 
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
 
@@ -52,6 +54,12 @@ function routes(app: Express) {
     "/api/products/:productId",
     validateResource(getProductSchema),
     getProductHandler
+  );
+
+  app.get(
+    "/api/products/",
+    validateResource(getAllProductsSchema),
+    getAllProductsHandler
   );
 
   app.delete(
